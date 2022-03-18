@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Colorpicker from "./Colorpicker";
+import Gradient from "./Gradient";
 
 function App() {
+  const [colors, setColors] = useState([
+    {
+      id: 1,
+      hexa: "#657334" 
+    }, 
+    {
+      id: 2,
+      hexa: "#FFFFFF" 
+    }, 
+    {
+      id: 3,
+      hexa: "#000000" 
+    }, 
+  ]);
+
+  const colorList = colors.map((color) => color.hexa).join(',');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {colors.map((color) => (
+        <Colorpicker hexa={color.hexa} key={color.id} colors={colors} setColors={colors} />
+      ))  }
+      <Gradient colorList={colorList} colors={colors} /> 
     </div>
   );
 }
